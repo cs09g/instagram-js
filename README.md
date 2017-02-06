@@ -12,5 +12,5 @@ var instagram = new instagram(<i><b>your_access_token</b></i>);
 
 instagram.users.self(function(res) {
   console.log(res);
-}
+});
 </pre>
