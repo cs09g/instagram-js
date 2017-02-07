@@ -214,8 +214,13 @@ instagram.prototype.relationships = {
 	*/
 	updateUserRelationship: function(param, callback) {
 		$.ajax({
-			method: "post",
-			url: instagram.getUrl() + "/users/" + param.userId + "/relationship?access_token=" + instagram.getAccessToken() + "&action=" + param.action,
+			type: "post",
+			url: instagram.getUrl() + "/users/" + param.userId + "/relationship",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({ 
+				"access_token": instagram.getAccessToken(),
+				"action": param.action
+			}),
 			dataType: "jsonp",
 			success: function(res) {
 				callbacak(res);
@@ -285,8 +290,118 @@ instagram.prototype.media = {
 	}
 };
 
+instagram.prototype.comments = {
+	/*
+		method: GET
+		url: /media/{media-id}/comments
+
+		param: {
+			mediaId: [integer|string]
+		}
+		callback: [function]
+	*/
+	mediaId: function(param, callback) {
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/commnets?access_token=" + instagram.getAccessToken(),
+			dataType: "jsonp",
+			success: function(res) {
+				callback(res);
+			}
+		});
+	},
+
+	/*
+		method: POST
+		url: /media/{media-id}/comments
+
+		param: {
+			mediaId: [integer|string]
+			text: [string]
+		}
+		callback: [function]
+	*/
+	add: function(param, callback) {
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/comments",
+			type: "post",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({
+				"access_token": instagram.getAccessToken(),
+				"text": param.text
+			}),
+			dataType: "jsonp",
+			success: function(res) {
+				callback(res);
+			}
+		});
+	},
+
+	/*
+		method: DELETE
+		url: /media/{media-id}/comments/{commend-id}
+
+		param: {
+			mediaId: [integer|string]
+			commentId: [integer|string]
+		}
+		callback: [function]
+	*/
+	delete: function(param, callback) {
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/comments/" + param.commentId,
+			type: "delete",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({
+				"access_token": instagram.getAccessToken()
+			}),
+			dataType: "jsonp",
+			success: function(res) {
+				callback(res);
+			}
+		});
+	}
+};
+
+instagram.prototype.likes = {
+	/*
+		method: GET
+		url: /media/{media-id}/likes
+
+		param: {
+			mediaId: [integer|string]
+		}
+		callback: [function]
+	*/
+	mediaId: function(param, callback) {
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes?access_token=" + instagram.getAccessToken(),
+			dataType: "jsonp",
+			success: function(res) {
+				callback(res);
+			}
+		});
+	},
+
+	/*
+		method: POST
+		url: /media/{media-id}/likes
+
+		param: {
+			mediaId: [integer|string]
+		}
+		callback: [function]
+	*/
+	set: function(param, callback) {
+		
+	}
+};
+
 instagram.prototype.tags = {
-	/*	param: {
+	/*	
+		method: GET
+		url: /tags/{tag-name}
+
+		param: {
 			tagName: [string]
 		}
 		callback: [function]
@@ -303,7 +418,7 @@ instagram.prototype.tags = {
 
 	/*	
 		method: GET
-		url: /tags/{tag-name}
+		url: /tags/{tag-name}/media/recent
 
 		param: {
 			tagName: [string]
@@ -325,7 +440,7 @@ instagram.prototype.tags = {
 
 	/*	
 		method: GET
-		url: /tags/{tag-name}/media/recent
+		url: /tags/search
 
 		param: {
 			q: [string]
