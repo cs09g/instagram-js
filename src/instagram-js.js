@@ -55,9 +55,9 @@ instagram.prototype.users = {
 		url: /users/self/media/recent
 
 		param: {
-			count: [integer|string]
-			minId: [integer|string]
-			maxId: [integer|string]
+			count: [integer]
+			minId: [integer]
+			maxId: [integer]
 		}
 		callback: [function]
 	*/
@@ -77,8 +77,8 @@ instagram.prototype.users = {
 
 		param: {
 			userId: [string]
-			minId: [integer|string]
-			maxId: [integer|string]
+			minId: [integer]
+			maxId: [integer]
 			count: [integer]
 		}
 		callback: [function]
@@ -99,7 +99,7 @@ instagram.prototype.users = {
 
 		param: {
 			count: [integer]
-			maxLikeId: [integer|string]
+			maxLikeId: [integer]
 		}
 		callback: [function]
 	*/
@@ -235,7 +235,7 @@ instagram.prototype.media = {
 		url: /media/{media-id}
 
 		param: {
-			mediaId: [integer|string]
+			mediaId: [integer]
 		}
 		callback: [function]
 	*/	
@@ -254,7 +254,7 @@ instagram.prototype.media = {
 		url: /media/shortcode/{shortcode}
 
 		param: {
-			shortcode: [integer|string]
+			shortcode: [integer]
 		}
 		callback: [function]
 	*/
@@ -296,7 +296,7 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments
 
 		param: {
-			mediaId: [integer|string]
+			mediaId: [integer]
 		}
 		callback: [function]
 	*/
@@ -315,7 +315,7 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments
 
 		param: {
-			mediaId: [integer|string]
+			mediaId: [integer]
 			text: [string]
 		}
 		callback: [function]
@@ -341,8 +341,8 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments/{commend-id}
 
 		param: {
-			mediaId: [integer|string]
-			commentId: [integer|string]
+			mediaId: [integer]
+			commentId: [integer]
 		}
 		callback: [function]
 	*/
@@ -368,7 +368,7 @@ instagram.prototype.likes = {
 		url: /media/{media-id}/likes
 
 		param: {
-			mediaId: [integer|string]
+			mediaId: [integer]
 		}
 		callback: [function]
 	*/
@@ -387,12 +387,47 @@ instagram.prototype.likes = {
 		url: /media/{media-id}/likes
 
 		param: {
-			mediaId: [integer|string]
+			mediaId: [integer]
 		}
 		callback: [function]
 	*/
 	set: function(param, callback) {
-		
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes",
+			type: "post",
+			contentType: "application/json; charset=utf-8",
+			dataType: "jsonp",
+			data: JSON.stringify({
+				"access_token": instagram.getAccessToken(),
+			}),
+			success: function(res) {
+				callback(res);
+			}
+		});
+	},
+
+	/*
+		method: DELETE
+		url: /media/{media-id}/likes
+
+		param: {
+			mediaId: [integer]
+		}
+		callback: [function]
+	*/
+	unset: function(param, callback) {
+		$.ajax({
+			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes",
+			type: "delete",
+			contentType: "application/json; charset=utf-8",
+			dataType: "jsonp",
+			data: JSON.stringify({
+				"access_token": instagram.getAccessToken()
+			}),
+			success: function(res) {
+				callback(res);
+			}
+		});
 	}
 };
 
@@ -422,8 +457,8 @@ instagram.prototype.tags = {
 
 		param: {
 			tagName: [string]
-			maxTagId: [integer|string]
-			minTagId: [integer|string]
+			maxTagId: [integer]
+			minTagId: [integer]
 			count: [integer|string]
 		}
 		callback: [function]
@@ -464,7 +499,7 @@ instagram.prototype.locations = {
 		url: /locations/{location-id}
 
 		param: {
-			locationId: [integer|string]
+			locationId: [integer]
 		}
 		callback: [function]
 	*/
@@ -483,9 +518,9 @@ instagram.prototype.locations = {
 		url: /locations/{location-id}/media/recent
 
 		param: {
-			locationId: [integer|string]
-			minId: [integer|string]
-			maxId: [integer|string]
+			locationId: [integer]
+			minId: [integer]
+			maxId: [integer]
 		}
 		callback: [function]
 	*/
