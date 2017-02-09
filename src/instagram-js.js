@@ -22,12 +22,11 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	self: function(callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self" + 
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -41,12 +40,11 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	userId: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/" + param.userId + "/?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/" + param.userId + 
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -62,12 +60,14 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	mediaRecent: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/media/recent/?access_token=" + instagram.getAccessToken() + (param.count ? "&count=" + param.count : "") + (param.minId ? "&min_id=" + param.minId : "") + (param.maxId ? "&max_id=" + param.maxId : ""),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self/media/recent" +
+			"?access_token=" + instagram.getAccessToken() +
+			(param.count ? "&count=" + param.count : "") +
+			(param.minId ? "&min_id=" + param.minId : "") +
+			(param.maxId ? "&max_id=" + param.maxId : "");
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -84,12 +84,13 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	userMediaRecent: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/" + param.userId + "/media/recent/?access_token=" + instagram.getAccessToken() + (param.minId ? "&min_id=" + parma.minId : "") + (param.maxId ? "&max_id=" + param.maxId : ""),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/" + param.userId + "/media/recent" +
+			"?access_token=" + instagram.getAccessToken() +
+			(param.minId ? "&min_id=" + parma.minId : "") +
+			(param.maxId ? "&max_id=" + param.maxId : "");
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -104,12 +105,12 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	mediaLiked: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/media/liked?access_token=" + instagram.getAccessToken() + (param.maxLikeId ? "&max_like_id=" + param.maxLikeId : ""),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self/media/liked" +
+			"?access_token=" + instagram.getAccessToken() +
+			(param.maxLikeId ? "&max_like_id=" + param.maxLikeId : "");
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -124,12 +125,12 @@ instagram.prototype.users = {
 		callback: [function]
 	*/
 	search: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/search?access_token=" + instagram.getAccessToken() + "&q=" + param.q + (param.count ? "&count=" + param.count : ""),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/search" +
+			"?access_token=" + instagram.getAccessToken() +
+			"&q=" + param.q + (param.count ? "&count=" + param.count : "");
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	}
 };
@@ -142,12 +143,11 @@ instagram.prototype.relationships = {
 		callback: [function]
 	*/
 	follows: function(callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/follows?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self/follows" +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -158,12 +158,11 @@ instagram.prototype.relationships = {
 		callback: [function]
 	*/
 	followedBy: function(callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/followed-by?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self/followed-by" +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -174,12 +173,11 @@ instagram.prototype.relationships = {
 		callback: [function]
 	*/
 	requestedBy: function(callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/self/requested-by?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/self/requested-by" +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -193,12 +191,11 @@ instagram.prototype.relationships = {
 		callback: [function]
 	*/
 	userRelationships: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/users/" + param.userId + "/relationship?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/users/" + param.userId + "/relationship" +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -213,19 +210,19 @@ instagram.prototype.relationships = {
 		callback: [function]
 	*/
 	updateUserRelationship: function(param, callback) {
-		$.ajax({
-			type: "post",
-			url: instagram.getUrl() + "/users/" + param.userId + "/relationship",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify({ 
-				"access_token": instagram.getAccessToken(),
-				"action": param.action
-			}),
-			dataType: "jsonp",
-			success: function(res) {
-				callbacak(res);
-			}
-		});
+		var xhr = new XMLHttpRequest();
+		var url = "/users/" + param.userId + "/relationship";
+
+		xhr.withCredentials = true;
+		xhr.open("post", url);
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
+		xhr.onreadystatechange = function() {
+			callback(xhr.response);
+		};
+		
+		var params = "access_token=" + instagram.getAccessToken() + "&action=" + param.action;
+		// this works but it occurs CORS error without any server setting
+		xhr.send(params);
 	}
 };
 
@@ -235,17 +232,16 @@ instagram.prototype.media = {
 		url: /media/{media-id}
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 		}
 		callback: [function]
 	*/	
 	mediaId: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/media/" + param.mediaId +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -259,12 +255,11 @@ instagram.prototype.media = {
 		callback: [function]
 	*/
 	shortcode: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/shortcode/" + param.shortcode + "?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/media/shortcode/" + param.shortcode +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -280,12 +275,14 @@ instagram.prototype.media = {
 		callback: [function]
 	*/
 	search: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/search?" + "lat=" + param.lat + "&lng=" + param.lng + (param.distance ? "&distance=" + param.distance : "") + "&access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/media/search" +
+			"?access_token=" + instagram.getAccessToken() +
+			"&lat=" + param.lat +
+			"&lng=" + param.lng + 
+			(param.distance ? "&distance=" + param.distance : "");
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	}
 };
@@ -296,17 +293,16 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 		}
 		callback: [function]
 	*/
 	mediaId: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/commnets?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/media/" + param.mediaId + "/comments" + 
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -315,25 +311,27 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 			text: [string]
 		}
 		callback: [function]
 	*/
 	add: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/comments",
-			type: "post",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify({
-				"access_token": instagram.getAccessToken(),
-				"text": param.text
-			}),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
-		});
+		// this works but it occurs CORS error without any server setting
+		// it doesn't ensure the callback will be called when its status is success(200)
+		var xhr = new XMLHttpRequest();
+		var url = "/media/" + param.mediaId + "/comments";
+
+		xhr.withCredentials = true;
+		xhr.open("post", url);
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
+		xhr.onreadystatechange = function() {
+			console.log(xhr);
+			callback(xhr.response);
+		};
+		
+		var params = "access_token=" + instagram.getAccessToken() + "&text=" + param.text;
+		xhr.send(params);
 	},
 
 	/*
@@ -341,24 +339,26 @@ instagram.prototype.comments = {
 		url: /media/{media-id}/comments/{commend-id}
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 			commentId: [integer]
 		}
 		callback: [function]
 	*/
 	delete: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/comments/" + param.commentId,
-			type: "delete",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify({
-				"access_token": instagram.getAccessToken()
-			}),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
-		});
+		// this doesn't work at all without server setting.
+		// [Access-Control-Allow-Origin] header is needed
+		var xhr = new XMLHttpRequest();
+		var url = "/media/" + param.mediaId + "/comments/" + param.commentId +
+			"?access_token=" + instagram.getAccessToken();
+		
+		xhr.withCredentials = true;
+		xhr.open("delete", url);
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() {
+			callback(xhr.response);
+		};
+		
+		xhr.send(null);
 	}
 };
 
@@ -368,17 +368,16 @@ instagram.prototype.likes = {
 		url: /media/{media-id}/likes
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 		}
 		callback: [function]
 	*/
 	mediaId: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/media/" + param.mediaId + "/likes" +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+		   callback(res);
 		});
 	},
 
@@ -387,23 +386,25 @@ instagram.prototype.likes = {
 		url: /media/{media-id}/likes
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 		}
 		callback: [function]
 	*/
 	set: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes",
-			type: "post",
-			contentType: "application/json; charset=utf-8",
-			dataType: "jsonp",
-			data: JSON.stringify({
-				"access_token": instagram.getAccessToken(),
-			}),
-			success: function(res) {
-				callback(res);
-			}
+		// this works but it occurs CORS error without any server setting
+		// it doesn't ensure the callback will be called when its status is success(200)
+		var xhr = new XMLHttpRequest();
+		xhr.url = "/media/" + param.mediaId + "/likes";
+		xhr.withCredentials = true;
+
+		xhr.open("post", url);
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange(function() {
+			callback(xhr.response);
 		});
+
+		var params = "access_token=" + instagram.getAccessToken();
+		xhr.send(params);
 	},
 
 	/*
@@ -411,23 +412,25 @@ instagram.prototype.likes = {
 		url: /media/{media-id}/likes
 
 		param: {
-			mediaId: [integer]
+			mediaId: [string]
 		}
 		callback: [function]
 	*/
 	unset: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/media/" + param.mediaId + "/likes",
-			type: "delete",
-			contentType: "application/json; charset=utf-8",
-			dataType: "jsonp",
-			data: JSON.stringify({
-				"access_token": instagram.getAccessToken()
-			}),
-			success: function(res) {
-				callback(res);
-			}
-		});
+		// this doesn't work at all without server setting.
+		// [Access-Control-Allow-Origin] header is needed
+		var xhr = new XMLHttpRequest();
+		var url = "/media/" + param.mediaId + "/likes" +
+			"?access_token=" + instagram.getAccessToken();
+		
+		xhr.withCredentials = true;
+		xhr.open("delete", url);
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() {
+			callback(xhr.response);
+		};
+		
+		xhr.send(null);
 	}
 };
 
@@ -442,12 +445,11 @@ instagram.prototype.tags = {
 		callback: [function]
 	*/
 	tagName: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/tags/" + param.tagName + "?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/tags/" + param.tagName +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	},
 
@@ -464,12 +466,14 @@ instagram.prototype.tags = {
 		callback: [function]
 	*/
 	mediaRecent: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/tags/" + param.tagName + "/media/recent?" + (param.maxTagId ? "max_tag_id=" + param.maxTagId : "") + (param.minTagId ? "&min_tag_id=" + param.minTagId : "") + (param.count ? "&count=" + parma.count : "") + "&access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/tags/" + param.tagName + "/media/recent" + 
+			"?access_token=" + instagram.getAccessToken()
+			(param.maxTagId ? "&max_tag_id=" + param.maxTagId : "") +
+			(param.minTagId ? "&min_tag_id=" + param.minTagId : "") +
+			(param.count ? "&count=" + parma.count : "");
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	},
 
@@ -483,12 +487,12 @@ instagram.prototype.tags = {
 		callback: [function]
 	*/
 	search: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/tags/search?q=" + param.q + "&access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/tags/search" +
+			"?access_token=" + instagram.getAccessToken() +
+			"&q=" + param.q;
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	}
 };
@@ -504,12 +508,11 @@ instagram.prototype.locations = {
 		callback: [function]
 	*/
 	locationId: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/locations/" + param.locationId + "?access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/locations/" + param.locationId +
+			"?access_token=" + instagram.getAccessToken();
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	},
 
@@ -525,12 +528,13 @@ instagram.prototype.locations = {
 		callback: [function]
 	*/
 	mediaRecent: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/locations/" + param.locationId + "/media/recent?access_token=" + instagram.getAccessToken() + (param.minId ? "&min_id=" + param.minId : "") + (param.maxId ? "&max_id=" + param.maxId : ""),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/locations/" + param.locationId + "/media/recent" +
+			"?access_token=" + instagram.getAccessToken() +
+			(param.minId ? "&min_id=" + param.minId : "") +
+			(param.maxId ? "&max_id=" + param.maxId : "");
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	},
 
@@ -547,12 +551,29 @@ instagram.prototype.locations = {
 		callback: [function]
 	*/
 	search: function(param, callback) {
-		$.ajax({
-			url: instagram.getUrl() + "/locations/search?" + (param.facebookPlacesId ? "facebook_places_id=" + param.facebookPlacesId : "lat=" + param.lat + "&lng=" + param.lng) + (param.distance ? "&distance=" + param.distance : "") + "&access_token=" + instagram.getAccessToken(),
-			dataType: "jsonp",
-			success: function(res) {
-				callback(res);
-			}
+		var url = "/locations/search" +
+			"?access_token=" + instagram.getAccessToken() +
+			(param.facebookPlacesId ? 
+				"&facebook_places_id=" + param.facebookPlacesId : 
+				"&lat=" + param.lat + "&lng=" + param.lng) + 
+			(param.distance ? "&distance=" + param.distance : "");
+
+		jsonp(url, function(res) {
+			callback(res);
 		});
 	}
+};
+
+// inject <script> into <body> to request as 'get' method
+var jsonp = function(url, callback) {
+    var cb = 'jsonp_callback_' + Math.round(100000 * Math.random());
+    window[cb] = function(data) {
+        delete window[cb];
+        document.body.removeChild(script);
+        callback(data);
+    };
+
+    var script = document.createElement('script');
+    script.src = instagram.getUrl() + url + (url.indexOf('?') !== -1 ? '&' : '?') + 'callback=' + cb;
+    document.body.appendChild(script);
 };
