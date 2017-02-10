@@ -11,6 +11,20 @@ instagram = function(access_token) {
 	this.getUrl = function() {
 		return url;
 	};
+
+	// inject <script> into <body> to request as 'get' method
+	this.jsonp = function(url, callback) {
+	    var cb = 'jsonp_callback_' + Math.round(100000 * Math.random());
+	    window[cb] = function(data) {
+	        delete window[cb];
+	        document.body.removeChild(script);
+	        callback(data);
+	    };
+
+	    var script = document.createElement('script');
+	    script.src = instagram.getUrl() + url + (url.indexOf('?') !== -1 ? '&' : '?') + 'callback=' + cb;
+	    document.body.appendChild(script);
+	};
 };
 
 instagram.prototype.users = {
@@ -25,7 +39,7 @@ instagram.prototype.users = {
 		var url = "/users/self" + 
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -43,7 +57,7 @@ instagram.prototype.users = {
 		var url = "/users/" + param.userId + 
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -66,7 +80,7 @@ instagram.prototype.users = {
 			(param.minId ? "&min_id=" + param.minId : "") +
 			(param.maxId ? "&max_id=" + param.maxId : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -89,7 +103,7 @@ instagram.prototype.users = {
 			(param.minId ? "&min_id=" + parma.minId : "") +
 			(param.maxId ? "&max_id=" + param.maxId : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -109,7 +123,7 @@ instagram.prototype.users = {
 			"?access_token=" + instagram.getAccessToken() +
 			(param.maxLikeId ? "&max_like_id=" + param.maxLikeId : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -129,7 +143,7 @@ instagram.prototype.users = {
 			"?access_token=" + instagram.getAccessToken() +
 			"&q=" + param.q + (param.count ? "&count=" + param.count : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	}
@@ -146,7 +160,7 @@ instagram.prototype.relationships = {
 		var url = "/users/self/follows" +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -161,7 +175,7 @@ instagram.prototype.relationships = {
 		var url = "/users/self/followed-by" +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -176,7 +190,7 @@ instagram.prototype.relationships = {
 		var url = "/users/self/requested-by" +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -194,7 +208,7 @@ instagram.prototype.relationships = {
 		var url = "/users/" + param.userId + "/relationship" +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -240,7 +254,7 @@ instagram.prototype.media = {
 		var url = "/media/" + param.mediaId +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -258,7 +272,7 @@ instagram.prototype.media = {
 		var url = "/media/shortcode/" + param.shortcode +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -281,7 +295,7 @@ instagram.prototype.media = {
 			"&lng=" + param.lng + 
 			(param.distance ? "&distance=" + param.distance : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	}
@@ -301,7 +315,7 @@ instagram.prototype.comments = {
 		var url = "/media/" + param.mediaId + "/comments" + 
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -376,7 +390,7 @@ instagram.prototype.likes = {
 		var url = "/media/" + param.mediaId + "/likes" +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 		   callback(res);
 		});
 	},
@@ -448,7 +462,7 @@ instagram.prototype.tags = {
 		var url = "/tags/" + param.tagName +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	},
@@ -472,7 +486,7 @@ instagram.prototype.tags = {
 			(param.minTagId ? "&min_tag_id=" + param.minTagId : "") +
 			(param.count ? "&count=" + parma.count : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	},
@@ -491,7 +505,7 @@ instagram.prototype.tags = {
 			"?access_token=" + instagram.getAccessToken() +
 			"&q=" + param.q;
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	}
@@ -511,7 +525,7 @@ instagram.prototype.locations = {
 		var url = "/locations/" + param.locationId +
 			"?access_token=" + instagram.getAccessToken();
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	},
@@ -533,7 +547,7 @@ instagram.prototype.locations = {
 			(param.minId ? "&min_id=" + param.minId : "") +
 			(param.maxId ? "&max_id=" + param.maxId : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	},
@@ -558,22 +572,9 @@ instagram.prototype.locations = {
 				"&lat=" + param.lat + "&lng=" + param.lng) + 
 			(param.distance ? "&distance=" + param.distance : "");
 
-		jsonp(url, function(res) {
+		instagram.jsonp(url, function(res) {
 			callback(res);
 		});
 	}
 };
 
-// inject <script> into <body> to request as 'get' method
-var jsonp = function(url, callback) {
-    var cb = 'jsonp_callback_' + Math.round(100000 * Math.random());
-    window[cb] = function(data) {
-        delete window[cb];
-        document.body.removeChild(script);
-        callback(data);
-    };
-
-    var script = document.createElement('script');
-    script.src = instagram.getUrl() + url + (url.indexOf('?') !== -1 ? '&' : '?') + 'callback=' + cb;
-    document.body.appendChild(script);
-};
